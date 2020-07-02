@@ -68,24 +68,24 @@ var getUserRepos = function (user) {
             repoContainerEl.appendChild(repoEl);
         }
     }
+}
 
-    var formSubmitHandler = function (event) {
+var formSubmitHandler = function (event) {
 
-        event.preventDefault();
+    event.preventDefault();
 
-        // get value from input element
-        var username = nameInputEl.value.trim();
+    // get value from input element
+    var username = nameInputEl.value.trim();
 
-        if (username) {
-            getUserRepos(username);
-            nameInputEl.value = "";
-        } else {
-            alert("Please enter a GitHub username");
-        }
+    if (username) {
+        getUserRepos(username);
+        nameInputEl.value = "";
+    } else {
+        alert("Please enter a GitHub username");
+    }
 
-        console.log(event);
-    };
+    console.log(event);
+};
 
 
-    userFormEl.addEventListener("submit", formSubmitHandler);
-// getUserRepos();
+userFormEl.addEventListener("submit", formSubmitHandler);
