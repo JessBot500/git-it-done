@@ -1,6 +1,11 @@
 
 var issueContainerEl = document.querySelector("#issues-container");
+var limitWarningEl = document.querySelector("#limit-warning");
 
+var displayWarning = function (repo) {
+    // add text to warning container
+    limitWarningEl.textContent = "To see more than 30 issues, visit ";
+};
 
 var displayIssues = function (issues) {
 
@@ -42,6 +47,17 @@ var displayIssues = function (issues) {
 
 var getRepoIssues = function (repo) {
     var apiUrl = "https://api.github.com/repos/" + repo + "/issues?direction=asc";
+
+    if (response.ok) {
+        response.json().then(function (data) {
+            displayIssues(data);
+
+            // check if api has paginated issues
+            if (response.header.get("Link")) {
+                console.log("repo has more than 30 issues");
+            }
+        });
+    }
 
     fetch(apiUrl).then(function (response) {
         // request was successful
